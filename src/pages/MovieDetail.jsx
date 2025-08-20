@@ -42,18 +42,19 @@ const MovieDetail = () => {
           <p className="mb-4">{movie.overview}</p>
 
           {/* Genres */}
-          {movie.genres && (
-        <div className="mb-4 flex flex-wrap gap-3">
-      {movie.genres.map((genre) => (
-      <span
+        {movie.genres && (<div className="mb-4 flex flex-wrap gap-3">
+        {movie.genres.map((genre) => (
+       <span
         key={genre.id}
-        className="px-2 py-1 border rounded-lg text-lg text-gray-900"
+        className="
+          px-2 py-1 border rounded-lg text-lg text-gray-900 dark:text-white bg-gray-200 dark:bg-gray-800 border-gray-300 dark:border-gray-600"
       >
         {genre.name}
       </span>
-      ))}
-       </div>
-      )}
+    ))}
+  </div>
+)}
+
 
 
           {/* Rating & Reviews */}
