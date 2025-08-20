@@ -11,11 +11,7 @@ export const Header = () => {
 
   useEffect(() => {
     localStorage.setItem("darkMode", JSON.stringify(darkMode));
-    if (darkMode) {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
+    document.documentElement.classList.toggle("dark", darkMode);
   }, [darkMode]);
 
   const handleSearch = (e) => {
@@ -28,67 +24,52 @@ export const Header = () => {
     }
   };
 
-  const activeClass = "text-blue-500 dark:text-white font-semibold";
-  const inActiveClass =
-    "text-gray-700 hover:text-blue-500 dark:text-gray-300 dark:hover:text-white";
+  const closeMenu = () => setMenuOpen(false);
+
+  const activeClass = "text-gray-300 dark:text-white font-semibold";
+  const inActiveClass = "text-gray-700 hover:text-blue-500 dark:text-gray-300 dark:hover:text-white";
+
+  // Navigation Links Component//
+  const NavigationLinks = ({ isMobile = false }) => (
+    <ul className={`flex ${isMobile ? "flex-col space-y-2 text-gray-800" : "space-x-8 text-white"}`}>
+      <li><NavLink to="/" end onClick={isMobile ? closeMenu : undefined} className={({ isActive }) => isActive ? activeClass : inActiveClass}>Home</NavLink></li>
+      <li><NavLink to="/movies/popular" onClick={isMobile ? closeMenu : undefined} className={({ isActive }) => isActive ? activeClass : inActiveClass}>Popular</NavLink></li>
+      <li><NavLink to="/movies/top" onClick={isMobile ? closeMenu : undefined} className={({ isActive }) => isActive ? activeClass : inActiveClass}>Top Rated</NavLink></li>
+      <li><NavLink to="/movies/upcoming" onClick={isMobile ? closeMenu : undefined} className={({ isActive }) => isActive ? activeClass : inActiveClass}>Upcoming</NavLink></li>
+    </ul>
+  );
 
   return (
-    <header className="bg-white dark:bg-gray-900 border-b dark:border-gray-800 sticky top-0 z-50">
-      <nav className="container mx-auto flex flex-wrap items-center p-4">
-        {/* Logo */}
+    <header className="bg-purple-400 dark:bg-gray-900 border-b dark:border-gray-800 sticky top-0 z-50">
+      <nav className="container flex flex-wrap items-center justify-between p-4">
+
         <Link to="/" className="flex items-center">
           <img src={Logo} className="h-8 mr-2" alt="Logo" />
-          <span className="text-xl font-bold dark:text-white">Cinema Guide</span>
+          <span className="text-xl font-bold dark:text-red-500">Cinema Guide</span>
         </Link>
 
-        {/* Centered nav links */}
-        <div className="flex-1 flex justify-center">
-          <ul className="flex flex-col md:flex-row md:space-x-6">
-            <li>
-              <NavLink to="/" end className={({ isActive }) => (isActive ? activeClass : inActiveClass)}>Home</NavLink>
-            </li>
-            <li>
-              <NavLink to="/movies/popular" className={({ isActive }) => (isActive ? activeClass : inActiveClass)}>Popular</NavLink>
-            </li>
-            <li>
-              <NavLink to="/movies/top" className={({ isActive }) => (isActive ? activeClass : inActiveClass)}>Top Rated</NavLink>
-            </li>
-            <li>
-              <NavLink to="/movies/upcoming" className={({ isActive }) => (isActive ? activeClass : inActiveClass)}>Upcoming</NavLink>
-            </li>
-          </ul>
+        <div className="hidden md:flex justify-center">
+          <NavigationLinks />
         </div>
 
-        {/* Right side: Theme toggle & mobile menu */}
         <div className="flex items-center space-x-4">
-          <button
-            onClick={() => setDarkMode(!darkMode)}
-            className="text-gray-700 dark:text-white text-xl"
-            title="Toggle Theme"
-          >
-            {darkMode ? "🌞" : "🌙"}
+          <button onClick={() => setDarkMode(!darkMode)} className="text-2xl">
+          {darkMode? "☀️" :"🌙"}
           </button>
-          <button
-            onClick={() => setMenuOpen(!menuOpen)}
-            className="md:hidden text-gray-700 dark:text-white"
-          >
-            ☰
-          </button>
+          <button onClick={() => setMenuOpen(!menuOpen)} className="md:hidden text-gray-700 dark:text-white">☸️</button>
         </div>
 
-        {/* Search Bar */}
-        <div className={`w-full md:w-80 md:flex md:items-center ${menuOpen ? "" : "hidden"} md:block`}>
-          <form onSubmit={handleSearch} className="mt-4 md:mt-0 md:ml-6">
-            <input
-              name="search"
-              type="text"
-              placeholder="Search..."
-              className="p-2 rounded border w-full md:w-72 dark:bg-gray-700 dark:text-white"
-              autoComplete="off"
-            />
-          </form>
+        <div className={`w-full md:hidden mt-4 ${menuOpen ? "block" : "hidden"}`}>
+          <NavigationLinks isMobile />
+        </div>
+
+        <div className={`w-full md:w-80 md:flex md:items-center ${menuOpen ? "" : "hidden"} md:block mt-4 md:mt-0`}>
+        <form onSubmit={handleSearch}>
+        <input name="search" type="text" placeholder="Search..." className="p-2 rounded-lg border w-full md:w-72 dark:bg-gray-700 dark:text-white" autoComplete="off"/>
+        </form>
         </div>
       </nav>
     </header>
   );
 };
+

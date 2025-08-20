@@ -16,9 +16,10 @@ export const MovieDetail = () => {
   useEffect(() => {
     const fetchMovie = async () => {
       const res = await fetch(
-        `https://api.themoviedb.org/3/movie/${id}?api_key=b80d59c33d6d57ed9c7e3713f91c188a`
+        `https://api.themoviedb.org/3/movie/${id}?api_key=b71a3dc14bc70ac06be4086ca7ed4a72`
       );
       const data = await res.json();
+      console.log(data);
       setMovie(data);
     };
     fetchMovie();
@@ -42,21 +43,22 @@ export const MovieDetail = () => {
 
           {/* Genres */}
           {movie.genres && (
-            <div className="mb-5 flex flex-wrap gap-2">
-              {movie.genres.map((genre) => (
-                <span
-                  key={genre.id}
-                  className="px-3 py-1 border rounded text-sm border-gray-300 dark:border-gray-600"
-                >
-                  {genre.name}
-                </span>
-              ))}
-            </div>
-          )}
+        <div className="mb-4 flex flex-wrap gap-3">
+      {movie.genres.map((genre) => (
+      <span
+        key={genre.id}
+        className="px-2 py-1 border rounded-lg text-lg text-gray-900"
+      >
+        {genre.name}
+      </span>
+      ))}
+       </div>
+      )}
+
 
           {/* Rating & Reviews */}
           <div className="flex items-center mb-4">
-            <span className="text-yellow-400 text-lg">★</span>
+            <span className="text-yellow-400 text-lg">⭐</span>
             <span className="ml-2">{movie.vote_average}</span>
             <span className="mx-2">•</span>
             <span>{movie.vote_count} reviews</span>
