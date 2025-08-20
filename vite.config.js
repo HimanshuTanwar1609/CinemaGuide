@@ -1,9 +1,8 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
-// https://vitejs.dev/config/
 export default defineConfig({
-  base: '/CinemaGuide/',  
+  base: '/',  // <-- set to root because HashRouter handles routing
   plugins: [react()],
   css: {
     postcss: './postcss.config.js'
