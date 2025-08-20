@@ -1,7 +1,6 @@
 import React, { lazy, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
 
-// Lazy load your page components
 const MovieList = lazy(() => import("../pages/MovieList"));
 const MovieDetail = lazy(() => import("../pages/MovieDetail"));
 const Search = lazy(() => import("../pages/Search"));
@@ -9,7 +8,7 @@ const PageNotFound = lazy(() => import("../pages/PageNotFound"));
 
 export const AllRoutes = () => (
   <div className="dark:bg-darkbg">
-    <Suspense fallback={<div className="text-center mt-20 text-xl">Loading...</div>}>
+    <Suspense fallback={null}>
       <Routes>
         <Route path="/" end element={<MovieList apiPath="movie/now_playing" title="Home" />} />
         <Route path="movies/popular" element={<MovieList apiPath="movie/popular" title="Popular" />} />
