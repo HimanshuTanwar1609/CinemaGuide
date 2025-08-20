@@ -1,0 +1,2 @@
+import{j as e,L as t}from"./index-ZsDVrmde.js";const l=()=>e.jsxs("main",{className:"min-h-screen bg-white dark:bg-black text-black dark:text-white flex flex-col justify-center items-center px-4 py-10",children:[e.jsx("h1",{className:"text-3xl font-bold mb-10",children:"404 - Page Not Found"}),e.jsx(t,{to:"/",className:`w-64 text-center text-lg text-white bg-blue-600 rounded-lg px-5 py-3 font-semibold shadow-lg\r
+                   hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 transition`,children:"Back To Home"})]});export{l as default};
