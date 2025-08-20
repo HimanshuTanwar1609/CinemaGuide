@@ -5,69 +5,32 @@ import Backup from "../assets/images/backup.png";
 
 export const MovieDetail = () => {
   const { id } = useParams();
-  const [movie, setMovie] = useState(null);
-  const [imageLoaded, setImageLoaded] = useState(false);
-  const [usingBackup, setUsingBackup] = useState(false); // track if backup is used
+  const [movie, setMovie] = useState({});
 
-  useTitle(movie?.title || "Loading...");
+  useTitle(movie.title);
 
-  // We only want to show movie details once real image is loaded
-  // So we treat backup as no-image and keep loading until real image loads.
-
-  // Compose image URL if poster_path exists
-  const image = movie?.poster_path
+  const image = movie.poster_path
     ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
-    : null;
+    : Backup;
 
   useEffect(() => {
     const fetchMovie = async () => {
-      setMovie(null);      // reset loading state
-      setImageLoaded(false);
-      setUsingBackup(false);
       const res = await fetch(
         `https://api.themoviedb.org/3/movie/${id}?api_key=b71a3dc14bc70ac06be4086ca7ed4a72`
       );
       const data = await res.json();
+      console.log(data);
       setMovie(data);
-      // If no poster_path, mark that we will use backup immediately
-      if (!data.poster_path) {
-        setUsingBackup(true);
-        setImageLoaded(true);  // Consider backup image as loaded immediately
-      }
     };
     fetchMovie();
   }, [id]);
-
-  // If still loading movie data or waiting for real image (when not backup)
-  if (!movie || (!imageLoaded && !usingBackup)) {
-    return (
-      <main className="min-h-screen flex justify-center items-center bg-gray-100 dark:bg-gray-900">
-        <div className="text-gray-900 dark:text-white text-xl">Loading...</div>
-      </main>
-    );
-  }
 
   return (
     <main className="bg-gray-100 dark:bg-gray-900 min-h-screen">
       <section className="flex flex-wrap justify-center gap-8 p-6 text-gray-900 dark:text-white">
         {/* Movie Poster */}
         <div className="max-w-sm">
-          {image ? (
-            <img
-              src={image}
-              alt={movie.title}
-              className="rounded w-full"
-              loading="lazy"
-              onLoad={() => setImageLoaded(true)}
-            />
-          ) : (
-            <img
-              src={Backup}
-              alt="backup poster"
-              className="rounded w-full"
-              loading="lazy"
-            />
-          )}
+          <img src={image} alt={movie.title} className="rounded w-full" />
         </div>
 
         {/* Movie Details */}
@@ -80,17 +43,18 @@ export const MovieDetail = () => {
 
           {/* Genres */}
           {movie.genres && (
-            <div className="mb-4 flex flex-wrap gap-3">
-              {movie.genres.map((genre) => (
-                <span
-                  key={genre.id}
-                  className="px-2 py-1 border rounded-lg text-lg text-gray-900"
-                >
-                  {genre.name}
-                </span>
-              ))}
-            </div>
-          )}
+        <div className="mb-4 flex flex-wrap gap-3">
+      {movie.genres.map((genre) => (
+      <span
+        key={genre.id}
+        className="px-2 py-1 border rounded-lg text-lg text-gray-900"
+      >
+        {genre.name}
+      </span>
+      ))}
+       </div>
+      )}
+
 
           {/* Rating & Reviews */}
           <div className="flex items-center mb-4">
