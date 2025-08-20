@@ -3,7 +3,7 @@ import { useFetch } from "../hooks/useFetch";
 import { useTitle } from "../hooks/useTitle";
 import { Card } from "../component";
 
-export const Search = ({ apiPath }) => {
+const Search = ({ apiPath }) => {
   const [searchParams] = useSearchParams();
   const queryTerm = searchParams.get("q");
   const { data: movies } = useFetch(apiPath, queryTerm);
@@ -39,3 +39,4 @@ export const Search = ({ apiPath }) => {
     </main>
   );
 };
+export default Search;

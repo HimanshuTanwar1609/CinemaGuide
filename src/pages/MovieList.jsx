@@ -2,7 +2,7 @@ import { useFetch } from "../hooks/useFetch";
 import { useTitle } from "../hooks/useTitle";
 import { Card } from "../component/Card";
 
-export const MovieList = ({ apiPath, title }) => {
+const MovieList = ({ apiPath, title }) => {
   const { data: movies } = useFetch(apiPath);
   useTitle(title);
 
@@ -18,3 +18,4 @@ export const MovieList = ({ apiPath, title }) => {
     </main>
   );
 };
+export default MovieList;

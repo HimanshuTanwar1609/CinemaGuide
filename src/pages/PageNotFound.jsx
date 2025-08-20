@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-export const PageNotFound = () => {
+const PageNotFound = () => {
   return (
     <main className="min-h-screen bg-white dark:bg-black text-black dark:text-white flex flex-col justify-center items-center px-4 py-10">
       <h1 className="text-3xl font-bold mb-10">404 - Page Not Found</h1>
@@ -14,3 +14,4 @@ export const PageNotFound = () => {
     </main>
   );
 };
+export default PageNotFound;

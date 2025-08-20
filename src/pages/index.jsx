@@ -1,5 +1,4 @@
-export { MovieList } from "./MovieList";
-export { MovieDetail } from "./MovieDetail";
-export { Search } from "./Search";
-
-export { PageNotFound } from "./PageNotFound";
+export { default as MovieList } from "./MovieList";
+export { default as MovieDetail } from "./MovieDetail";
+export { default as Search } from "./Search";
+export { default as PageNotFound } from "./PageNotFound";

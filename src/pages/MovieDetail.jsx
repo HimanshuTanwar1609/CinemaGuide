@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { useTitle } from "../hooks/useTitle";
 import Backup from "../assets/images/backup.png";
 
-export const MovieDetail = () => {
+const MovieDetail = () => {
   const { id } = useParams();
   const [movie, setMovie] = useState({});
 
@@ -93,3 +93,4 @@ export const MovieDetail = () => {
     </main>
   );
 };
+export default MovieDetail;
