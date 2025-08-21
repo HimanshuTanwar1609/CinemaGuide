@@ -5,11 +5,13 @@ import Logo from "../assets/images/img_logo.jpg";
 export const Header = () => {
   const navigate = useNavigate();
 
-  const [darkMode, setDarkMode] = useState(() => {
-    const storedMode = localStorage.getItem("darkMode");
-    return storedMode === "true";
-  });
+  // Default to light mode //
+  const getInitialTheme = () => {
+    const stored = localStorage.getItem("darkMode");
+    return stored === "true";
+  };
 
+  const [darkMode, setDarkMode] = useState(getInitialTheme);
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
@@ -34,17 +36,15 @@ export const Header = () => {
     "text-gray-700 hover:text-blue-500 dark:text-gray-300 dark:hover:text-white";
 
   const NavigationLinks = ({ isMobile = false }) => (
-    <ul className={`flex ${
-      isMobile ? "flex-col space-y-2 text-gray-800" : "space-x-8 text-white"
-    }`}>
+    <ul className={`flex ${isMobile ? "flex-col space-y-2 text-gray-800" : "space-x-8 text-white"}`}>
       <li>
-        <NavLink to="/" end onClick={isMobile ? closeMenu : undefined}className={({ isActive }) => (isActive ? activeClass : inActiveClass)}>Home</NavLink>
+        <NavLink to="/" end onClick={isMobile ? closeMenu : undefined} className={({ isActive }) => (isActive ? activeClass : inActiveClass)}>Home</NavLink>
       </li>
       <li>
-        <NavLink to="/movies/popular" onClick={isMobile ? closeMenu : undefined}className={({ isActive }) => (isActive ? activeClass : inActiveClass)}>Popular</NavLink>
+        <NavLink to="/movies/popular" onClick={isMobile ? closeMenu : undefined} className={({ isActive }) => (isActive ? activeClass : inActiveClass)}>Popular</NavLink>
       </li>
       <li>
-        <NavLink to="/movies/top" onClick={isMobile ? closeMenu : undefined}className={({ isActive }) => (isActive ? activeClass : inActiveClass)}>Top Rated</NavLink>
+        <NavLink to="/movies/top" onClick={isMobile ? closeMenu : undefined} className={({ isActive }) => (isActive ? activeClass : inActiveClass)}>Top Rated</NavLink>
       </li>
       <li>
         <NavLink to="/movies/upcoming" onClick={isMobile ? closeMenu : undefined} className={({ isActive }) => (isActive ? activeClass : inActiveClass)}>Upcoming</NavLink>
@@ -79,7 +79,7 @@ export const Header = () => {
 
         <div className={`w-full md:w-80 md:flex md:items-center ${menuOpen ? "" : "hidden"} md:block mt-4 md:mt-0`}>
           <form onSubmit={handleSearch}>
-            <input name="search" type="text" placeholder="Search..." className="p-2 rounded-lg border w-full md:w-72 dark:bg-gray-700 dark:text-white" autoComplete="off"/>
+            <input name="search" type="text" placeholder="Search..." className="p-2 rounded-lg border w-full md:w-72 dark:bg-gray-700 dark:text-white" autoComplete="off" />
           </form>
         </div>
       </nav>
