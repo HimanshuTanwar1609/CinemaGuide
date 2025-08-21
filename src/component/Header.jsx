@@ -5,17 +5,10 @@ import Logo from "../assets/images/img_logo.jpg";
 export const Header = () => {
   const navigate = useNavigate();
 
-  // Default to light mode //
-  const getInitialTheme = () => {
-    const stored = localStorage.getItem("darkMode");
-    return stored === "true";
-  };
-
-  const [darkMode, setDarkMode] = useState(getInitialTheme);
+  const [darkMode, setDarkMode] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    localStorage.setItem("darkMode", JSON.stringify(darkMode));
     document.documentElement.classList.toggle("dark", darkMode);
   }, [darkMode]);
 
